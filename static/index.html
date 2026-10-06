@@ -22,27 +22,41 @@ th:first-child,td:first-child{text-align:left}th{color:var(--mu);font-weight:500
 svg{width:100%;height:180px;background:#0f1218;border-radius:8px}
 .err{color:#ff8a8a}footer{padding:14px;color:var(--mu);font-size:12px;text-align:center}
 td input[type=number]{width:64px;text-align:right}
+
+/* Responsive desktop tables and mobile cards */
+html{color-scheme:dark}header{padding:20px 24px;align-items:center}header small{font-size:12px;max-width:640px}h1{font-size:22px}
+main{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;padding:20px;align-items:start}.card{min-width:0;padding:18px;border-radius:14px}.card h2{font-size:17px;margin-bottom:12px}
+input,select,button{min-height:44px;padding:9px 11px;max-width:100%;font-size:14px}input:focus-visible,select:focus-visible,button:focus-visible,tr:focus-visible{outline:2px solid #8bb3ff;outline-offset:2px}button:hover{filter:brightness(1.15)}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:8px}.filters #q{grid-column:1/-1;width:100%;min-width:0!important}.filters select{width:100%;min-width:0}#cnt{margin:10px 0;font-size:12px}
+th,td{padding:9px 6px;font-variant-numeric:tabular-nums}td:first-child{white-space:normal;min-width:130px}#etf-table thead th{position:sticky;top:0;background:var(--card);z-index:1}.scroll{max-height:440px;overscroll-behavior:contain;scrollbar-width:thin}#detail{scroll-margin-top:12px}#detail h2 small{display:block;font-size:12px;margin-top:3px}
+.kv{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.kv div{min-width:0;padding:10px;font-size:12px}.kv b{font-size:18px;margin-top:3px;overflow-wrap:anywhere}svg{display:block;width:100%;height:200px}svg path{vector-effect:non-scaling-stroke}
+.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.field{display:flex;flex-direction:column;gap:6px;min-width:0;color:var(--mu);font-size:12px}.field input,.field select{width:100%;color:var(--tx)}.field.wide{grid-column:1/-1}.actions{display:flex;gap:8px;margin:14px 0}.actions button{flex:1}#res{margin-top:16px;min-width:0}.matrix-scroll{overflow:auto;max-width:100%;border:1px solid var(--line);border-radius:8px;margin-top:8px}.matrix-scroll table{width:max-content;min-width:100%}.matrix-scroll td:first-child{min-width:70px;position:sticky;left:0;background:var(--card)}.matrix-scroll td,.matrix-scroll th{padding:8px}#pt td:first-child{min-width:100px}#pt td input{width:72px}#pt button{min-width:44px}#pt tfoot{font-size:12px}#empty{padding:14px;background:#0f1218;border-radius:8px}footer{max-width:1000px;margin:auto;padding:16px 24px 28px;line-height:1.8}
+@media(min-width:1200px){.kv{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:1050px){main{grid-template-columns:minmax(0,1fr)}.card{width:100%}}
+@media(max-width:600px){header{padding:18px 16px;gap:6px;align-items:flex-start;flex-direction:column}header small{line-height:1.7}main{padding:12px;gap:12px}.card{padding:14px}input,select,button{font-size:16px;min-height:44px}.scroll{max-height:450px;overflow-x:hidden}#etf-table thead{display:none}#etf-table,#list{display:block;width:100%}#list tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 12px;padding:12px 10px;margin:0 0 8px;border:1px solid var(--line);border-radius:10px;background:#12151c}#list td{display:flex;align-items:baseline;justify-content:space-between;gap:6px;padding:0;border:0;white-space:normal;font-size:13px;min-width:0}#list td:before{content:attr(data-label);color:var(--mu);font-size:11px;white-space:nowrap}#list td:first-child{display:block;grid-column:1/-1;font-size:15px;font-weight:600;margin-bottom:5px}#list td:first-child:before{display:none}#list td small{font-size:11px;font-weight:400}#list tr:hover td{background:transparent}
+#pt thead{display:none}#pt,#pb{display:block;width:100%}#pb tr{display:grid;grid-template-columns:1fr 1fr 44px;gap:10px;padding:12px;border:1px solid var(--line);border-radius:10px;margin:10px 0}#pb td{border:0;padding:0;min-width:0;white-space:normal;text-align:left;display:flex;flex-direction:column;gap:4px}#pb td:before{content:attr(data-label);font-size:11px;color:var(--mu)}#pb td:first-child{grid-column:1/3;display:block;grid-row:1;min-width:0;font-weight:600}#pb td:first-child:before,#pb td:last-child:before{display:none}#pb td:last-child{grid-column:3;grid-row:1;align-self:start}#pb td:nth-child(2){grid-column:1;grid-row:2}#pb td:nth-child(3){grid-column:2/4;grid-row:2}#pb td:nth-child(4){grid-column:2/4;grid-row:3}#pb td input{width:100%;max-width:100px}#pt tfoot,#pt tfoot tr{display:block}#pt tfoot tr{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 0}#pt tfoot td{border:0;padding:0;white-space:normal}#pt tfoot #asum{grid-column:1/-1;text-align:left}#pt tfoot td:empty{display:none}.kv{grid-template-columns:repeat(2,minmax(0,1fr))}svg{height:180px}.controls{gap:10px}footer{padding:10px 18px 24px}}
+@media(max-width:360px){.filters{grid-template-columns:1fr}.filters #q{grid-column:auto}.controls{grid-template-columns:1fr}.field.wide{grid-column:auto}}
 </style></head><body>
 <header><h1>KR ETF Lab</h1><small>국내 상장 ETF 조회 · 포트폴리오 구성 도우미 (참고용, 투자 권유 아님)</small></header>
 <main>
 <section class="card"><h2>ETF 찾기</h2>
- <div class="row"><input id="q" placeholder="이름 또는 코드 (예: KODEX, 반도체, 069500)" style="flex:1;min-width:160px">
- <select id="cat"><option value="">전체 분류</option></select>
- <select id="sort"><option value="mcap_100m">시총순</option><option value="value_mil">거래대금순</option><option value="ret_3m">3개월 수익률순</option><option value="change_rate">등락률순</option></select></div>
+ <div class="row filters"><input aria-label="ETF 이름 또는 코드 검색" id="q" placeholder="이름 또는 코드 (예: KODEX, 반도체, 069500)" style="flex:1;min-width:160px">
+ <select aria-label="ETF 분류" id="cat"><option value="">전체 분류</option></select>
+ <select aria-label="ETF 정렬 기준" id="sort"><option value="mcap_100m">시총순</option><option value="value_mil">거래대금순</option><option value="ret_3m">3개월 수익률순</option><option value="change_rate">등락률순</option></select></div>
  <div class="mu" id="cnt"></div>
- <div class="scroll"><table><thead><tr><th>종목</th><th>현재가</th><th>등락</th><th>3개월</th><th>괴리율</th><th>시총(억)</th></tr></thead><tbody id="list"></tbody></table></div>
+ <div class="scroll"><table id="etf-table"><thead><tr><th>종목</th><th>현재가</th><th>등락</th><th>3개월</th><th>괴리율</th><th>시총(억)</th></tr></thead><tbody id="list"></tbody></table></div>
  <div id="detail" style="margin-top:12px"></div>
 </section>
 <section class="card"><h2>포트폴리오</h2>
- <div class="mu" id="empty">왼쪽 목록에서 ETF를 클릭하면 담겨요. (최대 15개)</div>
+ <div class="mu" id="empty">ETF 목록에서 종목을 선택한 뒤 "포트폴리오에 담기"를 누르세요. (최대 15개)</div>
  <table id="pt" style="display:none"><thead><tr><th>종목</th><th>비중(%)</th><th>금액(원)</th><th>수량</th><th></th></tr></thead><tbody id="pb"></tbody><tfoot><tr><td>합계</td><td id="wsum"></td><td id="asum"></td><td></td><td></td></tr></tfoot></table>
- <div class="row" style="margin-top:8px">투자금 <input id="amt" type="number" value="10000000" step="1000000" style="width:120px">
-  기간 <select id="years"><option>1</option><option>3</option><option selected>5</option></select>년
-  리밸런싱 <select id="reb"><option value="yearly">연 1회</option><option value="monthly">월 1회</option><option value="none">안 함</option></select></div>
- <div class="row">비중 자동 제안:
-  <select id="method"><option value="inv_vol">변동성 역가중</option><option value="risk_parity">리스크 패리티</option><option value="min_var">최소분산</option><option value="equal">동일비중</option></select>
-  종목당 최대 <select id="maxw"><option value="1">제한 없음</option><option value="0.5">50%</option><option value="0.4" selected>40%</option><option value="0.3">30%</option></select>
-  <button id="sug">제안 적용</button> <button class="p" id="run">분석</button></div>
+ <div class="controls">
+ <label class="field wide">투자금 (원)<input id="amt" type="number" value="10000000" min="0" step="1000000" inputmode="numeric"></label>
+ <label class="field">분석 기간<select id="years"><option value="1">1년</option><option value="3">3년</option><option value="5" selected>5년</option></select></label>
+ <label class="field">리밸런싱<select id="reb"><option value="yearly">연 1회</option><option value="monthly">월 1회</option><option value="none">안 함</option></select></label>
+ <label class="field wide">비중 자동 제안 방식<select id="method"><option value="inv_vol">변동성 역가중</option><option value="risk_parity">리스크 패리티</option><option value="min_var">최소분산</option><option value="equal">동일비중</option></select></label>
+ <label class="field wide">종목당 최대 비중<select id="maxw"><option value="1">제한 없음</option><option value="0.5">50%</option><option value="0.4" selected>40%</option><option value="0.3">30%</option></select></label>
+ </div><div class="actions"><button id="sug">제안 적용</button><button class="p" id="run">분석</button></div>
  <div id="res"></div>
 </section>
 </main>
@@ -57,13 +71,14 @@ async function load(){
  const d=await api('/api/etfs?'+p);
  if($('#cat').options.length==1)d.cats.forEach(c=>$('#cat').add(new Option(c,c)));
  $('#cnt').textContent=`${d.total}개 중 ${d.items.length}개 표시`;
- $('#list').innerHTML=d.items.map(e=>{ETF[e.code]=e;return `<tr class="click" data-c="${e.code}"><td>${e.name}<br><small>${e.code} · ${e.cat}</small></td><td>${fmt(e.price)}</td><td class="${cls(e.change_rate)}">${e.change_rate??'-'}%</td><td class="${cls(e.ret_3m)}">${e.ret_3m??'-'}%</td><td>${e.premium??'-'}%</td><td>${fmt(e.mcap_100m)}</td></tr>`}).join('');
+ $('#list').innerHTML=d.items.map(e=>{ETF[e.code]=e;return `<tr class="click" tabindex="0" aria-label="${e.name} 상세 보기" data-c="${e.code}"><td>${e.name}<br><small>${e.code} · ${e.cat}</small></td><td data-label="현재가">${fmt(e.price)}</td><td data-label="등락" class="${cls(e.change_rate)}">${e.change_rate??'-'}%</td><td data-label="3개월" class="${cls(e.ret_3m)}">${e.ret_3m??'-'}%</td><td data-label="괴리율">${e.premium??'-'}%</td><td data-label="시총(억)">${fmt(e.mcap_100m)}</td></tr>`}).join('');
 }
+$('#list').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();const tr=e.target.closest('tr');if(tr)detail(tr.dataset.c)}});
 let t;['q','cat','sort'].forEach(i=>$('#'+i).addEventListener('input',()=>{clearTimeout(t);t=setTimeout(load,250)}));
 $('#list').addEventListener('click',e=>{const tr=e.target.closest('tr');if(tr)detail(tr.dataset.c)});
-function line(pts,key,color='#4f8cff'){const v=pts.map(p=>p[key]),mn=Math.min(...v),mx=Math.max(...v),W=600,H=180;
- const path=v.map((y,i)=>`${i?'L':'M'}${(i/(v.length-1)*W).toFixed(1)},${(H-8-(y-mn)/(mx-mn||1)*(H-16)).toFixed(1)}`).join('');
- return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><path d="${path}" fill="none" stroke="${color}" stroke-width="2"/></svg>`}
+function line(pts,key,color='#4f8cff'){if(!pts.length)return '<p class="mu">차트 데이터가 없어요.</p>';const v=pts.map(p=>p[key]),mn=Math.min(...v),mx=Math.max(...v),W=600,H=180;
+ const path=v.map((y,i)=>`${i?'L':'M'}${(i/Math.max(v.length-1,1)*W).toFixed(1)},${(H-8-(y-mn)/(mx-mn||1)*(H-16)).toFixed(1)}`).join('');
+ return `<svg role="img" aria-label="시계열 추이 차트" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><path d="${path}" fill="none" stroke="${color}" stroke-width="2"/></svg>`}
 async function detail(code){
  $('#detail').innerHTML='불러오는 중…';
  try{const d=await api('/api/etf/'+code),i=d.info,s=d.stats;
@@ -77,7 +92,7 @@ function equalize(){const w=Math.floor(1000/P.length)/10;P.forEach(p=>p.weight=w
 function render(){$('#empty').style.display=P.length?'none':'';$('#pt').style.display=P.length?'':'none';
  const amt=+$('#amt').value||0;let ws=0,as=0;
  $('#pb').innerHTML=P.map((p,i)=>{const a=amt*p.weight/100,q=Math.floor(a/p.price);ws+=p.weight;as+=q*p.price;
-  return `<tr><td>${p.name}<br><small>${p.code}</small></td><td><input type="number" step="0.1" value="${p.weight}" data-i="${i}"></td><td>${fmt(Math.round(a))}</td><td>${fmt(q)}주</td><td><button data-x="${i}">✕</button></td></tr>`}).join('');
+  return `<tr><td>${p.name}<br><small>${p.code}</small></td><td data-label="비중 (%)"><input aria-label="${p.name} 비중 (%)" min="0" max="100" inputmode="decimal" type="number" step="0.1" value="${p.weight}" data-i="${i}"></td><td data-label="배분 금액 (원)">${fmt(Math.round(a))}</td><td data-label="매수 수량">${fmt(q)}주</td><td><button aria-label="${p.name} 삭제" data-x="${i}">✕</button></td></tr>`}).join('');
  $('#wsum').textContent=ws.toFixed(1)+'%';$('#asum').textContent=fmt(as)+' (매수 가능액)'}
 $('#pb').addEventListener('input',e=>{if(e.target.dataset.i!=null){P[e.target.dataset.i].weight=+e.target.value;recalc()}});
 $('#pb').addEventListener('click',e=>{if(e.target.dataset.x!=null){P.splice(e.target.dataset.x,1);render()}});
@@ -89,9 +104,9 @@ $('#sug').onclick=async()=>{if(!P.length)return;$('#res').innerHTML='계산 중�
  P.forEach(p=>p.weight=Math.round(d.weights[p.code]*1000)/10);render();$('#res').innerHTML='<span class="mu">비중을 반영했어요. “분석”으로 백테스트를 확인하세요.</span>'}catch(e){$('#res').innerHTML=`<span class="err">${e.message}</span>`}};
 $('#run').onclick=async()=>{if(!P.length)return;$('#res').innerHTML='계산 중…';try{
  const d=await api('/api/portfolio',body()),s=d.stats;
- const corr=P.length>1?`<h2 style="margin-top:12px">상관계수</h2><table><tr><th></th>${P.map(p=>`<th>${p.code}</th>`).join('')}</tr>${d.corr.map((r,i)=>`<tr><td>${P[i].code}</td>${r.map(x=>`<td style="background:rgba(79,140,255,${Math.max(x,0)*.5})">${x.toFixed(2)}</td>`).join('')}</tr>`).join('')}</table>`:'';
+ const corr=P.length>1?`<h2 style="margin-top:12px">상관계수</h2><div class="mu">표를 좌우로 밀어 모든 종목을 확인하세요.</div><div class="matrix-scroll" tabindex="0" role="region" aria-label="상관계수 표"><table><tr><th></th>${P.map(p=>`<th>${p.code}</th>`).join('')}</tr>${d.corr.map((r,i)=>`<tr><td>${P[i].code}</td>${r.map(x=>`<td style="background:rgba(79,140,255,${Math.max(x,0)*.5})">${x.toFixed(2)}</td>`).join('')}</tr>`).join('')}</table></div>`:'';
  $('#res').innerHTML=`<div class="mu">${d.start} ~ ${d.end} (${d.days}거래일, 겹치는 기간 기준)</div>
  <div class="kv"><div>누적수익<b class="${cls(s.total)}">${pc(s.total)}</b></div><div>연환산 수익<b>${pc(s.cagr)}</b></div><div>연 변동성<b>${pc(s.vol)}</b></div><div>최대낙폭<b>${pc(s.mdd)}</b></div><div>샤프(rf=0)<b>${s.sharpe.toFixed(2)}</b></div></div>
  ${line(d.curve,'v')}<div class="mu">포트폴리오 가치 (시작=100)</div>${line(d.curve,'dd','#ff5a5f')}<div class="mu">낙폭(%)</div>${corr}`}catch(e){$('#res').innerHTML=`<span class="err">${e.message}</span>`}};
-load();
+load().catch(e=>{$('#cnt').innerHTML='<span class="err">목록을 불러오지 못했어요. 잠시 후 새로고침해 주세요.</span>'});
 </script></body></html>
