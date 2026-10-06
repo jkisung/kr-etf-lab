@@ -1,9 +1,10 @@
 import os
 from flask import Flask, jsonify, request, send_from_directory
 import numpy as np
-import data, analytics
+import data, analytics, pension
 
 app = Flask(__name__, static_folder="static", static_url_path="")
+pension.register(app)
 
 @app.get("/")
 def index():
