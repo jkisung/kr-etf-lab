@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>연금저축 월 분배금 포트폴리오 · KR ETF Lab</title>
+<style>
+:root{--bg:#0f1115;--card:#181b22;--line:#2a2f3a;--tx:#e8eaf0;--mu:#8b93a5;--ac:#4f8cff;--wn:#ffb84f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+header{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+h1{font-size:18px;margin:0}small,.mu{color:var(--mu)}a{color:var(--ac)}
+main{max-width:1000px;margin:auto;padding:14px;display:grid;gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card h2{font-size:15px;margin:0 0 10px}
+input,select,button{background:#0f1218;color:var(--tx);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:inherit;min-height:44px}
+button.p{background:var(--ac);border-color:var(--ac);color:#fff;cursor:pointer}
+.form{display:grid;grid-template-columns:1.2fr 1.2fr auto auto;gap:10px;align-items:end}
+.form label{display:block;color:var(--mu);font-size:12px;margin-bottom:3px}.form input,.form select{width:100%}
+.chk{display:flex;gap:6px;align-items:center;min-height:44px}.chk input{width:20px;min-height:0}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:10px 0}
+.kv div{background:#0f1218;border:1px solid var(--line);border-radius:8px;padding:8px 10px}.kv b{display:block;font-size:17px}
+table{width:100%;border-collapse:collapse}th,td{padding:7px 6px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}th{color:var(--mu);font-weight:500}
+.warn{background:#2a2215;border:1px solid #5a4620;color:var(--wn);border-radius:8px;padding:8px 10px;margin:8px 0}
+.err{color:#ff8a8a}ul{margin:6px 0;padding-left:18px}li{margin:4px 0}
+footer{padding:14px;color:var(--mu);font-size:12px;text-align:center}
+.tag{font-size:11px;color:var(--mu);display:block}
+@media(max-width:700px){
+ header{flex-direction:column;gap:6px;align-items:flex-start}
+ main{padding:12px}.form{grid-template-columns:1fr}input,select,button{font-size:16px}
+ thead{display:none}table,tbody{display:block}
+ tbody tr{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;padding:12px;border:1px solid var(--line);border-radius:10px;margin:10px 0}
+ tbody td{border:0;padding:0;text-align:left}tbody td:first-child{grid-column:1/-1;font-weight:600}
+ tbody td[data-l]::before{content:attr(data-l);display:block;color:var(--mu);font-size:11px}
+}
+</style></head><body>
+<header><h1>연금저축 월 분배금 포트폴리오</h1><small>목표 월 분배금 → ETF 구성 제안 (참고용, 투자 권유 아님)</small><a href="/" style="margin-left:auto">← ETF 조회</a></header>
+<main>
+<section class="card"><h2>목표 입력</h2>
+<form class="form" id="f" onsubmit="return go(event)">
+<div><label for="t">목표 월 분배금 (원)</label><input id="t" type="number" inputmode="numeric" min="10000" max="10000000" step="10000" value="500000" required></div>
+<div><label for="m">구성</label><select id="m"><option value="stable">안정형</option><option value="balanced" selected>균형형</option><option value="high">고배당형</option></select></div>
+<label class="chk"><input id="a" type="checkbox"> 세후 기준 (연금소득세 5.5%)</label>
+<button class="p" type="submit">계산</button></form>
+<div class="mu" id="md" style="margin-top:8px"></div>
+<div class="row" style="margin-top:6px"><small>빠른 입력:</small> <button type="button" onclick="q(300000)">30만</button> <button type="button" onclick="q(500000)">50만</button> <button type="button" onclick="q(1000000)">100만</button></div>
+</section>
+<section class="card" id="res" hidden><h2 id="rt"></h2><div class="kv" id="kv"></div><div id="wn"></div>
+<table><thead><tr><th>ETF</th><th>비중</th><th>분배율(TTM)</th><th>배분 금액</th><th>현재가</th><th>매수 주수</th><th>월 분배금(예상)</th></tr></thead><tbody id="tb"></tbody></table>
+<p class="mu" id="asof"></p></section>
+<section class="card"><h2>꼭 알아두세요</h2><ul id="cv"></ul>
+<p class="mu" id="ref"></p></section>
+</main>
+<footer>분배율은 수동 관리 값(기준일 표시)이며 변동될 수 있습니다. 투자 판단과 책임은 본인에게 있습니다.</footer>
+<script>
+const $=id=>document.getElementById(id),W=n=>n==null?"-":Math.round(n).toLocaleString("ko-KR")+"원";
+const MD={stable:"",balanced:"",high:""};
+function q(v){$("t").value=v;go()}
+async function go(e){if(e)e.preventDefault();
+ const r=await fetch(`/api/pension/plan?target=${encodeURIComponent($("t").value)}&mix=${$("m").value}&after_tax=${$("a").checked?1:0}`);
+ const d=await r.json();
+ if(d.error){$("res").hidden=false;$("rt").textContent="";$("kv").innerHTML="";$("tb").innerHTML="";$("wn").innerHTML=`<div class="err">${d.error}</div>`;return false}
+ $("res").hidden=false;$("rt").textContent=`${d.label} · 월 ${W(d.target)}${d.after_tax?" (세후)":" (세전)"} 목표`;
+ const k=[["필요 원금(추정)",W(d.principal)],["가중평균 분배율",d.blended_yield+"%"],["실제 매수 금액",W(d.invested)],["예상 월 분배금(세전)",W(d.expected_month)],["예상 월 분배금(세후 5.5%)",W(d.expected_month_after_tax)]];
+ $("kv").innerHTML=k.map(([a,b])=>`<div><span class="mu">${a}</span><b>${b}</b></div>`).join("");
+ $("wn").innerHTML=`<p class="mu">${d.desc}</p>`+d.warnings.map(w=>`<div class="warn">⚠ ${w}</div>`).join("");
+ $("tb").innerHTML=d.rows.map(x=>`<tr><td>${x.name} <small class="tag">${x.code} · ${x.style} · 보수 ${x.fee}%${x.note?" · "+x.note:""}</small></td>
+ <td data-l="비중">${x.weight}%</td><td data-l="분배율(TTM, ${x.asof})">${x.yield_pct}%</td><td data-l="배분 금액">${W(x.alloc)}</td><td data-l="현재가">${W(x.price)}</td><td data-l="매수 주수">${x.shares==null?"-":x.shares.toLocaleString("ko-KR")+"주"}</td><td data-l="월 분배금(예상)">${W(x.month)}</td></tr>`).join("");
+ $("asof").textContent=`분배율 기준일 ${d.asof} · ${d.source}`;return false}
+(async()=>{const u=await (await fetch("/api/pension/universe")).json();
+ $("cv").innerHTML=u.caveats.map(c=>`<li>${c}</li>`).join("");
+ $("ref").textContent="참고: "+Object.values(u.ref_only).join(" / ");
+ $("md").innerHTML=Object.values(u.mixes).map(m=>`<b>${m.label}</b>: ${m.desc}`).join("<br>");
+ go()})();
+</script></body></html>
